@@ -90,18 +90,31 @@ $(function() {
         beforeEach(function (done) {
 			loadFeed(0, done);
         });
-        it('the feed container at at least contain one entry', function () {
+        it('the feed container at least contain one entry', function () {
 			let entry = document.getElementsByClassName('entry');
             expect(entry.length).toBeGreaterThan(0);
 		});
 	});
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function () {
-		let initialFeed;
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        // previeous feed from start up
+        const prevFeedHeader = document.getElementsByClassName('header-title')[0].textContent;
+        beforeEach(function (done) {
+            loadFeed(0, function(){
+                loadFeed(2, done); 
+            });
+        });
+        it('The content will be changed', (done) => {
+              // feed after change
+                const curFeedHeader = document.getElementsByClassName('header-title')[0].textContent;
+                expect(prevFeedHeader !== curFeedHeader).toBeTruthy();
+                done();
+        });
+    });
         
   });
 }());
