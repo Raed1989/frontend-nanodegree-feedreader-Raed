@@ -31,8 +31,14 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+<<<<<<< HEAD
         it('Url is not empty in all the feed', function() {
         allFeeds.forEach(feed => {
+=======
+        it('Url is not empty in all the feed and not defined', function() {
+        allFeeds.forEach(feed => {
+            expect(feed.url).toBeDefined();
+>>>>>>> Updated after review
             expect(feed.url.length).not.toBe(0);
         });
         });
@@ -60,7 +66,11 @@ $(function() {
          * hiding/showing of the menu element.
          */
         it('The menu element is hidden by default', function() {
+<<<<<<< HEAD
             expect(body.className).toContain('menu-hidden');
+=======
+            expect(body.classList.contains('menu-hidden')).toBeTruthy();
+>>>>>>> Updated after review
         })
 
          /* TODO: Write a test that ensures the menu changes
@@ -68,6 +78,7 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+<<<<<<< HEAD
         it('The menu element is hidden after click on icon.', function() {
             MenuHamburguer.click();
             expect(body.classList.contains('menu-hidden')).toBe(false);
@@ -76,6 +87,14 @@ $(function() {
         it('The menu element is showing after click on icon.', function() {
           MenuHamburguer.click();
           expect(body.classList.contains('menu-hidden')).toBe(true);
+=======
+        it('The menu element is hidden and showing after click on icon.', function() {
+            MenuHamburguer.click();
+            expect(body.classList.contains('menu-hidden')).toBe(false);
+            MenuHamburguer.click();
+            expect(body.classList.contains('menu-hidden')).toBe(true);
+        })
+>>>>>>> Updated after review
     })
 
     /* TODO: Write a new test suite named "Initial Entries" */
@@ -91,7 +110,11 @@ $(function() {
 			loadFeed(0, done);
         });
         it('the feed container at least contain one entry', function () {
+<<<<<<< HEAD
 			let entry = document.getElementsByClassName('entry');
+=======
+			let entry = document.querySelectorAll('.feed .entry');
+>>>>>>> Updated after review
             expect(entry.length).toBeGreaterThan(0);
 		});
 	});
@@ -101,15 +124,26 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+<<<<<<< HEAD
         // previeous feed from start up
         const prevFeedHeader = document.getElementsByClassName('header-title')[0].textContent;
         beforeEach(function (done) {
             loadFeed(0, function(){
                 loadFeed(2, done); 
+=======
+        // previeous feed from start
+        
+        let prevFeed;
+        beforeEach(function (done) {
+        loadFeed(0, function(){
+        prevFeed = document.getElementsByClassName('feed')[0].innerHTML; 
+        loadFeed(1, done); 
+>>>>>>> Updated after review
             });
         });
         it('The content will be changed', (done) => {
               // feed after change
+<<<<<<< HEAD
                 const curFeedHeader = document.getElementsByClassName('header-title')[0].textContent;
                 expect(prevFeedHeader !== curFeedHeader).toBeTruthy();
                 done();
@@ -117,4 +151,11 @@ $(function() {
     });
         
   });
+=======
+        const curFeed = document.getElementsByClassName('feed')[0].innerHTML;
+        expect(prevFeed !== curFeed).toBeTruthy();
+        done();
+        });
+    });
+>>>>>>> Updated after review
 }());
